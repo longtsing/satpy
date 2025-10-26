@@ -1,0 +1,60 @@
+构建文档
+========
+
+环境准备
+--------
+
+在构建文档之前，需要安装必要的依赖项。
+
+1. 创建文档构建环境（推荐）：
+
+    conda create -n satpy-docs python=3.11
+    conda activate satpy-docs
+    conda install -c conda-forge sphinx sphinx_rtd_theme sphinx-autodoc-typehints
+
+   或者使用项目提供的环境配置文件：
+
+    conda env create -f rtd_environment.yml -n satpy-docs
+    conda activate satpy-docs
+
+2. 安装 Satpy（生成 API 文档需要）：
+
+    cd e:\projects\satpy
+    pip install -e .
+
+构建 HTML 文档
+-------------
+
+环境准备完成后，在 doc_zh 目录中运行：
+
+    make html
+
+或者直接使用 sphinx-build：
+
+    sphinx-build -b html source build/html
+
+在 Windows 上也可以使用：
+
+    make.bat html
+
+生成的HTML文档页面位于 `build/html` 目录中。
+
+查看文档
+--------
+
+构建完成后，用浏览器打开 build/html/index.html 即可查看文档。
+
+清理构建
+--------
+
+如需清理并重新构建：
+
+    make clean
+    make html
+
+常见问题
+--------
+
+- 如果遇到模块导入错误，请确保已激活正确的环境并安装了所有依赖
+- 如果遇到编码问题，在 Windows 上可以设置：set PYTHONIOENCODING=utf-8
+- 本文档需要 Sphinx >= 8.2.0，可通过 sphinx-build --version 检查版本
